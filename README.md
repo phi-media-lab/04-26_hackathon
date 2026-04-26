@@ -87,6 +87,7 @@ cached action step: 约 1 ms
 ```text
 docs/
   data_collection.md              数据采集流程与采集效率
+                                  包含原始 Hugging Face 数据源链接
   system_architecture.md          系统架构与比赛展示主线
   demo_plan.md                    现场展示与 10 分钟汇报计划
   checkpoints.md                  5 个 ACT checkpoint 清单

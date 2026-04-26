@@ -100,7 +100,114 @@ action: (7,)
 138,383 frames
 ```
 
-## 6. 数据质量检查
+## 6. 原始数据源链接
+
+以下是训练使用过的 Hugging Face 原始数据集链接。每个链接对应一组现场采集 demonstrations。
+
+### 6.1 `flipbreadtopot`
+
+当前部署使用的是 newway 版本：
+
+```text
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot_newway1
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot_newway2
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot_newway3
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot_newway4
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot_newway5
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot_newway6
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot_newway7
+```
+
+早期版本也采集过：
+
+```text
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot1
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot2
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot3
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot4_newway
+https://huggingface.co/datasets/Lisette1231/20260425_flipbreadtopot5_newway
+```
+
+### 6.2 `pickbreadplate`
+
+```text
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintotheplate1
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintotheplate2
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintotheplate3
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintotheplate4
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintotheplate5
+```
+
+### 6.3 `pickbreadpot`
+
+最终训练使用正常的 `1/3/4/5` 四组，合计 42 episodes / 28,145 frames。
+
+```text
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintothepot1
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintothepot3
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintothepot4
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintothepot5
+```
+
+未进入最终训练的异常/未采用数据：
+
+```text
+https://huggingface.co/datasets/Lisette1231/20260425_pickthebreadintothepot2
+```
+
+### 6.4 `pickeggtopot`
+
+```text
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtopot1
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtopot2
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtopot3
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtopot4
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtopot5
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtopot6
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtopot7
+```
+
+### 6.5 `pickeggtoplate`
+
+最终训练使用 `1/2/3/4/6`，因为第 5 组上传不完整。
+
+```text
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtoplate1
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtoplate2
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtoplate3
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtoplate4
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtoplate6
+```
+
+异常数据集：
+
+```text
+https://huggingface.co/datasets/Lisette1231/20260426_pickeggtoplate5
+```
+
+该数据集当前只包含：
+
+```text
+.gitattributes
+README.md
+meta/info.json
+```
+
+缺少实际训练所需的 data parquet、video files 和 `meta/tasks.parquet`。
+
+## 7. 合并后的训练数据集
+
+原始 demonstrations 会先合并成 LeRobot 训练数据集，再用于 ACT 训练。
+
+| 动作 | 合并后 dataset repo |
+| --- | --- |
+| `flipbreadtopot` | `phi-media-lab/rebot_flipbreadtopot_newway_20260425_49eps` |
+| `pickbreadplate` | `phi-media-lab/rebot_pickbreadplate_20260425_50eps` |
+| `pickbreadpot` | `phi-media-lab/rebot_pickbreadpot_20260425_42eps` |
+| `pickeggtopot` | `phi-media-lab/rebot_pickeggtopot_20260426_50eps` |
+| `pickeggtoplate` | `phi-media-lab/rebot_pickeggtoplate_20260426_50eps_skip5` |
+
+## 8. 数据质量检查
 
 每个原始 Hugging Face dataset 进入训练前，需要做以下检查：
 
@@ -130,9 +237,9 @@ for repo in repos:
     print(sample["observation.images.wrist"].shape)
 ```
 
-## 7. 常见数据问题
+## 9. 常见数据问题
 
-### 7.1 数据集上传不完整
+### 9.1 数据集上传不完整
 
 例如 `20260426_pickeggtoplate5` 只包含：
 
@@ -152,7 +259,7 @@ video files
 
 这种数据集不能进入训练，只能跳过或重新上传。
 
-### 7.2 多数据集合并后的 timestamp 问题
+### 9.2 多数据集合并后的 timestamp 问题
 
 多个 LeRobot dataset 合并后，可能出现视频文件边界 timestamp 偏移错误。
 
@@ -173,7 +280,7 @@ loaded timestamps ...
 重新跨边界抽样验证
 ```
 
-## 8. 采集策略建议
+## 10. 采集策略建议
 
 为了最大化每小时有效数据量，采集时优先保证动作一致性，而不是追求极端多样性。
 
@@ -185,7 +292,7 @@ loaded timestamps ...
 4. 每采完一组立即跑数据读取检查，避免最后发现整组数据不可用。
 5. 不要把明显失败的 episode 混进训练集，否则 ACT 会模仿错误动作。
 
-## 9. 和训练效率的关系
+## 11. 和训练效率的关系
 
 采集和训练的组合效率是本项目的核心优势。
 

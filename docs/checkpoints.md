@@ -12,6 +12,8 @@
 | `pickeggtopot` | 夹蛋到锅 | 50 episodes / 30,900 frames | `fbsh96/rebot-act-pickeggtopot-50eps` | `checkpoint-020000` |
 | `pickeggtoplate` | 夹蛋到盘子 | 50 episodes / 30,355 frames | `fbsh96/rebot-act-pickeggtoplate-50eps-skip5` | `checkpoint-020000` |
 
+原始数据源链接见 [data_collection.md](data_collection.md)。
+
 ## 2. Hugging Face 路径
 
 ```text
