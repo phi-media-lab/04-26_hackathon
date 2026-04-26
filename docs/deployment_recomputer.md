@@ -16,6 +16,8 @@ checkpoint -> ACTPolicy.from_pretrained -> 本地推理 -> 7DoF action
 /home/recomputer/work/drtc-Phi/tools/rebot_act_local_infer.py
 ```
 
+真实机械臂评测时，我们主要使用 `lerobot-record --policy.path=...` 加载 ACT checkpoint 并记录 eval episode。完整命令见 [local_inference_commands.md](local_inference_commands.md)。
+
 ## 2. reComputer 硬件与环境
 
 已确认机器：

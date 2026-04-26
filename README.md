@@ -92,6 +92,7 @@ docs/
   demo_plan.md                    现场展示与 10 分钟汇报计划
   checkpoints.md                  5 个 ACT checkpoint 清单
   deployment_recomputer.md        reComputer / 推理端部署说明
+  local_inference_commands.md     lerobot-record 实机推理/评测命令
   training_efficiency_mi300x.md   MI300X 训练效率记录
   compute_comparison.md           MI300X vs L20 算力对比
   training_scripts.md             训练脚本使用说明
