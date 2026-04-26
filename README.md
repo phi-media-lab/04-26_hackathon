@@ -30,6 +30,23 @@
 
 说明：`pickeggtoplate` 是 `skip5` 版本，因为原始第 5 个数据集不完整，实际使用 `1/2/3/4/6` 合计 50 episodes。
 
+## 数据采集效率
+
+比赛现场使用遥操作采集动作示范数据。遥操作不是最终执行方案，而是训练数据来源。
+
+```text
+采集效率: 约 50 条有效 demonstrations / 小时
+当前累计: 241 effective episodes / 138,383 frames
+```
+
+结合训练效率，一个新动作理想情况下可以在约 2 小时内完成：
+
+```text
+约 1 小时采集 50 条有效示范
+约 50 分钟 MI300X 训练 20K
+数分钟上传 / 部署 checkpoint
+```
+
 ## 训练效率
 
 MI300X 上 5 个正式动作均完成 20,000 step 训练。
@@ -69,6 +86,7 @@ cached action step: 约 1 ms
 
 ```text
 docs/
+  data_collection.md              数据采集流程与采集效率
   system_architecture.md          系统架构与比赛展示主线
   demo_plan.md                    现场展示与 10 分钟汇报计划
   checkpoints.md                  5 个 ACT checkpoint 清单

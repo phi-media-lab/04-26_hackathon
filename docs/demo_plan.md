@@ -59,6 +59,13 @@ pickeggtoplate
 
 说明每个动作一个 checkpoint，方便重训、替换和组合。
 
+强调采集效率：
+
+```text
+约 50 条有效 demonstrations / 小时
+当前累计 241 effective episodes / 138,383 frames
+```
+
 ### 第 6 分钟：训练效率
 
 重点数字：

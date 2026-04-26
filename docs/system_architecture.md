@@ -78,6 +78,19 @@ observation.images.wrist: (3, 480, 640)
 action: (7,)
 ```
 
+比赛现场采集效率：
+
+```text
+约 50 条有效 demonstrations / 小时
+```
+
+当前正式训练集累计：
+
+```text
+241 effective episodes
+138,383 frames
+```
+
 关键经验：
 
 1. 每个 Hugging Face dataset 必须先验证 `tasks.parquet`、data parquet 和视频文件完整。

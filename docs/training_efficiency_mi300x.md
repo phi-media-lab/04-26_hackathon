@@ -6,6 +6,14 @@
 
 目标是在 reBot 机械臂当前数据格式上，为每个离散动作训练一个独立 ACT policy，并在 reComputer 测试终端上使用 LeRobot 原生 `ACTPolicy.from_pretrained(...)` 进行本地推理。
 
+训练前的数据采集效率约为：
+
+```text
+50 条有效 demonstrations / 小时
+```
+
+结合 MI300X 单动作 20K 约 50 分钟的训练速度，一个新动作从采集到可部署 checkpoint，理想情况下可以控制在约 2 小时内。
+
 当前正式 ACT 动作共 5 个：
 
 | 动作 | 说明 | 训练状态 | HF 产物 |
